@@ -1,3 +1,6 @@
+html{
+    scroll-behavior: smooth;
+}
 body.item-view .centered-top, 
   
   .post-share-buttons,
@@ -423,10 +426,7 @@ nav .logo a img{
    
    
  @media only screen and (max-width: 800px){
-    .mini-box{
-        width: 250px;
-        height: 180px;
-    }
+  
     .navbar ul li a{
      padding: 30px 18px;
     }
@@ -974,10 +974,7 @@ nav .logo a img{
    
   }
   @media only screen and (max-width: 700px){
-    .squar{
-        left: 5%;
-    }
- 
+   
     .long-area .btn{
       
         padding: 8px 13px;
