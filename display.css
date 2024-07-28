@@ -974,10 +974,10 @@ nav .logo a img{
    
   }
   @media only screen and (max-width: 700px){
-    .mini-box{
-        width: 180px;
-        height: 130px;
+    .squar{
+        left: 40px;
     }
+ 
     .long-area .btn{
       
         padding: 8px 13px;
@@ -990,10 +990,7 @@ nav .logo a img{
     }
   }
   @media only screen and (max-width: 450px){
-    .mini-box{
-        width: 130px;
-        height: 100px;
-    }
+  
     .squar .long-area .btn{
       
         font-size: 10px;
