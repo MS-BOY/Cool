@@ -287,17 +287,14 @@ nav .logo a img{
 }
     
 .menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    display: none;
+    color: #efefef;
+    transition: 1s;
     
-  
-
-  font-size: 30px;
-  cursor: pointer;
-  display: none;
-  color: #fff;
-  transition: 1s;
-  
-}
     
+  }
 .navbar ul li {
     display: block;
     position: relative;
