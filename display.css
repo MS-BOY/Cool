@@ -126,7 +126,12 @@ body{
      width: 200px;
 }
 
-
+.mini-box .add{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 40px;
+}
 
 
 .squar{
