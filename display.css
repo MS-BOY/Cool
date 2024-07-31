@@ -127,12 +127,7 @@ body{
 }
 
 
-.mini-box .add{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 40px;
-}
+
 
 .squar{
     width: 95%;
@@ -165,7 +160,7 @@ flex-wrap: wrap;
 .mini-box{
     display: inline-flex;
 position: relative;
-height: 220px;
+height: 250px;
 width: 300px;
 
 
@@ -1004,4 +999,22 @@ nav .logo a img{
         padding: 10px 15px;
     }
      
+    .mini-box:hover{
+        transform: scale(0);
+    }
+  
+.mini-box{
+
+    width: 90%;
+}
+.mini-box::after,
+.mini-box::before{
+    animation: none;
+}
+.mini-box img{
+    height: 250px;
+    width: 100%;
+    
+}
+
   }
