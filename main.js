@@ -1,4 +1,6 @@
 
+
+
 var slides=document.querySelectorAll('.tiile-animation p');
 var slideIndex=0;
 slides[slideIndex].classList.add('visible');
@@ -11,21 +13,9 @@ setInterval(function(){
     slides[slideIndex].classList.remove('visible');
     
 },2000);
+let menu=document.getElementById('menu-icon');
 
-let mobilenav=document.querySelector('.mobile-menu');
-document.querySelector('.OC-btn').oneclick = () => {
-    mobilenav.classList.add(active);
-}
-document.querySelector('.closebtn').oneclick = () => {
-    mobilenav.classList.remove('active');
-}
-
-VanillaTilt.init(document.querySelectorAll(".box"),{
-    max:15,
-    speed:200
-});
-
-document.getElementById('menu-icon').addEventListener('click', function() {
+menu.addEventListener('click', function() {
   const nav = document.getElementById('nav');
   if (nav.style.display === 'flex') {
     nav.style.display = 'none';
@@ -33,3 +23,23 @@ document.getElementById('menu-icon').addEventListener('click', function() {
     nav.style.display = 'flex';
   }
 });
+
+
+let listVideo=document.querySelectorAll('.video-list .vid');
+let mainVideo=document.querySelector('.main-video video');
+let title=document.querySelector('.main-video .title');
+
+listVideo.forEach(video=>{
+  video.onclick = () =>{
+    listVideo.forEach(vid => vid.classList.remove('active'));
+    video.classList.add('active');
+    if(video.classList.contains('active')){
+      let src = video.children[0].getAttribute('src');
+      mainVideo.src=src;
+      let text= video.children[1].innerHTML;
+      title.innerHTML=trxt;
+    }
+  }
+ })
+
+
