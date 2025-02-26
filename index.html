@@ -3,59 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Video Sharing Website</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; text-align: center; }
+        .video-container { padding: 50px; }
+        .video-container iframe { width: 80%; height: 400px; max-width: 800px; }
+        .share-buttons { margin-top: 20px; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; border: none; background: none; font-size: 24px; }
+        .material-icons { vertical-align: middle; }
+        .ad-section { margin: 20px 0; padding: 20px; background: #f4f4f4; }
+    </style>
+    <script>
+        function copyLink() {
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = window.location.href;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            alert('Link copied to clipboard!');
+        }
+        function shareOnSocial(media) {
+            let url = encodeURIComponent(window.location.href);
+            if (media === 'facebook') {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+            } else if (media === 'twitter') {
+                window.open(`https://twitter.com/intent/tweet?url=${url}`, '_blank');
+            }
+        }
+    </script>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="hero" class="hero">
-        <div class="hero-content">
-            <h1>Welcome to My Portfolio</h1>
-            <p>Showcasing my skills and projects.</p>
-            <button class="cta-button">Learn More</button>
+    
+    <div class="video-container">
+        <h1>Watch Video</h1>
+        <iframe src="https://www.youtube.com/embed/2Wlw8dZnlQY" frameborder="0" allowfullscreen></iframe>
+        <div class="share-buttons">
+            <button onclick="copyLink()"><i class="material-icons">content_copy</i></button>
+            <button onclick="shareOnSocial('facebook')"><i class="material-icons">facebook</i></button>
+            <button onclick="shareOnSocial('twitter')"><i class="material-icons">share</i></button>
         </div>
-    </section>
-
-    <section id="projects" class="projects">
-        <h2>My Projects</h2>
-        <div class="project-grid">
-            <div class="project">
-                <img src="https://source.unsplash.com/random/400x300/?website" alt="Project 1">
-                <h3>Project 1</h3>
-                <p>A brief description of project 1.</p>
-            </div>
-            <div class="project">
-                <img src="https://source.unsplash.com/random/400x300/?app" alt="Project 2">
-                <h3>Project 2</h3>
-                <p>A brief description of project 2.</p>
-            </div>
-            <div class="project">
-                <img src="https://source.unsplash.com/random/400x300/?design" alt="Project 3">
-                <h3>Project 3</h3>
-                <p>A brief description of project 3.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <h2>Contact Me</h2>
-        <form>
-            <input type="text" placeholder="Your Name">
-            <input type="email" placeholder="Your Email">
-            <textarea placeholder="Your Message"></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
-
-    <script src="script.js"></script>
+    </div>
+    
+    <div class="ad-section">
+        <h2>Sponsored Ad</h2>
+        <p>Advertisement goes here (e.g., Google AdSense or custom ad).</p>
+    </div>
+    
 </body>
 </html>
