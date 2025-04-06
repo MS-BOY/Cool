@@ -1,36 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <title>{{POLL_TITLE}}</title>
-    <meta name="description" content="{{POLL_DESCRIPTION}}" />
-    <meta name="author" content="MS" />
-    <link rel="icon" type="image/png" href="https://cdn0.iconfinder.com/data/icons/content-volume-2/24/poll-1024.png" />
+import express from "express";
+import { createClient } from "@supabase/supabase-js";
+import path from "path";
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="{{POLL_TITLE}}" />
-    <meta property="og:description" content="{{POLL_DESCRIPTION}}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{POLL_URL}}" />
-    <meta property="og:image" content="{{POLL_IMAGE}}" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+const app = express();
+const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_ANON_KEY!);
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:title" content="{{POLL_TITLE}}" />
-    <meta name="twitter:description" content="{{POLL_DESCRIPTION}}" />
-    <meta name="twitter:image" content="{{POLL_IMAGE}}" />
-  </head>
+app.get("/previews/poll/:id", async (req, res) => {
+  const pollId = req.params.id;
 
-  <body>
-    <p>Redirecting to the poll...</p>
-    <script>
-      // Redirect to actual React poll page
-      window.location.href = "{{POLL_URL}}";
-    </script>
-  </body>
-</html>
+  // Fetch poll data from Supabase
+  const { data: poll, error } = await supabase
+    .from("polls")
+    .select("*")
+    .eq("id", pollId)
+    .single();
+
+  if (error || !poll) {
+    return res.status(404).send("<h1>Poll Not Found</h1>");
+  }
+
+  // Construct the preview HTML
+  const imageUrl = poll.image_url || "/default-image.png";
+  const pollUrl = `https://pollcreate.netlify.app/poll/${pollId}`;
+
+  const html = `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>${poll.title}</title>
+        <meta name="description" content="${poll.description}" />
+        <meta name="author" content="MS" />
+        <link rel="icon" type="image/png" href="https://cdn0.iconfinder.com/data/icons/content-volume-2/24/poll-1024.png" />
+        
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:title" content="${poll.title}" />
+        <meta property="og:description" content="${poll.description}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="${pollUrl}" />
+        <meta property="og:image" content="${imageUrl}" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="${poll.title}" />
+        <meta name="twitter:description" content="${poll.description}" />
+        <meta name="twitter:image" content="${imageUrl}" />
+      </head>
+      <body>
+        <p>Redirecting to the poll...</p>
+        <script>
+          window.location.href = "${pollUrl}";
+        </script>
+      </body>
+    </html>
+  `;
+
+  res.send(html);
+});
+
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
+});
